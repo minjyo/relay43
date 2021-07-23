@@ -59,7 +59,7 @@
 ## 실행 예시
 ![https://user-images.githubusercontent.com/76931330/126756685-72aae473-2997-45cd-b56e-9dc71a2e99bb.png](https://user-images.githubusercontent.com/76931330/126756685-72aae473-2997-45cd-b56e-9dc71a2e99bb.png)
 
-![%E1%84%8D%E1%85%AE%E1%86%B7(Zzoom)%2033bd63909da64b71ac0692b8976ac9f4/example.png](%E1%84%8D%E1%85%AE%E1%86%B7(Zzoom)%2033bd63909da64b71ac0692b8976ac9f4/example.png)
+![https://user-images.githubusercontent.com/37871541/126757066-518fb406-f593-46e4-b36f-07961527b0e6.gif](https://user-images.githubusercontent.com/37871541/126757066-518fb406-f593-46e4-b36f-07961527b0e6.gif)
 
 ![https://user-images.githubusercontent.com/71375034/126757489-85cc91bc-9de2-4b35-bbcf-97fb081a542b.png](https://user-images.githubusercontent.com/71375034/126757489-85cc91bc-9de2-4b35-bbcf-97fb081a542b.png)
 

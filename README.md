@@ -1,5 +1,5 @@
 # 쭘(Zzoom)
-
+![https://user-images.githubusercontent.com/71375034/126758427-0b6c1f17-b74c-4747-b81c-00d27c472794.png](https://user-images.githubusercontent.com/71375034/126758427-0b6c1f17-b74c-4747-b81c-00d27c472794.png)
 ## 주제
 
 - STT(speech to text) 기능을 지원하는 실시간 화상, 음성 채팅 서비스

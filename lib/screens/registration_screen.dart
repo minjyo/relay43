@@ -56,6 +56,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     showSpinner = true;
                   });
                   try {
+                    print("email : $email , password : $password");
                     final dynamic newUser = await _auth.createUserWithEmailAndPassword(
                         email: email!, password: password!);
                     if (newUser != null) {

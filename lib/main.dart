@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:relay_43/pages/home_page.dart';
+import 'package:relay_43/pages/auth.dart';
+import 'package:relay_43/pages/main_page.dart';
 
 
 
@@ -26,7 +27,7 @@ class _MyAppState extends State<MyApp>{
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return MyHomePage(title: 'Flutter Demo Home Page');
+          return AuthPage(title: 'ZZom');
         }
 
         // Otherwise, show something whilst waiting for initialization to complete

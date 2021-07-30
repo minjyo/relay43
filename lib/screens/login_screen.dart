@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:relay_43/pages/main_page.dart';
 import 'package:relay_43/screens/welcome_screen.dart';
 import 'package:modal_progress_hud_alt/modal_progress_hud_alt.dart';
 
@@ -56,10 +57,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     showSpinner = true;
                   });
                   try {
+                    print("email : $email , password : $password");
                     final dynamic newUser = await _auth.signInWithEmailAndPassword(
                         email: email!, password: password!);
                     if (newUser != null) {
-                      Navigator.pushNamed(context, WelcomeScreen.id);
+                      Navigator.pushNamed(context, MainPage.id);
                     }
                     setState(() {
                       showSpinner = false;

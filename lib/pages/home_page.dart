@@ -1,17 +1,32 @@
 
 import 'package:flutter/material.dart';
+import 'package:relay_43/pages/chat_page.dart';
 
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+class MyHomePage extends StatelessWidget {
+  MyHomePage({Key? key, required this.title});
   
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: "Test",
+        home: MyHomeStatePage(title: this.title)
+    );
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomeStatePage extends StatefulWidget {
+  MyHomeStatePage({Key? key, required this.title});
+
+  final String title;
+  
+  @override
+  MyHomeStatePageState createState() => MyHomeStatePageState();
+}
+
+class MyHomeStatePageState extends State<MyHomeStatePage> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -30,9 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
+            ElevatedButton(onPressed: () => {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(groupId: "KdZCkPfkXvdzyibD3aoP", userName: "test",)))
+            }, child: Text("테스트 채팅방"),),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,

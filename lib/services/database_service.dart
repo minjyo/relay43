@@ -14,7 +14,8 @@ class DatabaseService {
   }
 
   getChats(String groupId) {
-    return FirebaseFirestore.instance.collection('groups').doc(groupId).collection('messages').snapshots();
+    return FirebaseFirestore.instance.collection('groups').doc(groupId)
+        .collection('messages').orderBy("time").snapshots();
   }
   
 }

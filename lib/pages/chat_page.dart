@@ -59,11 +59,7 @@ class _ChatPageState extends State<ChatPage> {
   해당 콜백 함수는 _chatMessages(Function callback) 함수에서 사용합니다.
   */
   _scrollCallBack(){
-      Future.delayed(Duration(milliseconds: 100), () {
-        //500ms 동안 마지막 위치로 애니매이션 효과를 주면서 이동
-        _scrollController.animateTo(_scrollController.position.maxScrollExtent, duration: const Duration(milliseconds: 300), curve: Curves.ease);
-      },
-      );
+
   }
   _sendMessage() {
     if (messageEditingController.text.isNotEmpty) {
@@ -90,6 +86,7 @@ class _ChatPageState extends State<ChatPage> {
     super.initState();
     setState(() {
       this._chats = DatabaseService().getChats(widget.groupId!);
+
     });
   }
 

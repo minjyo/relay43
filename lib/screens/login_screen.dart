@@ -1,7 +1,7 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:relay_43/pages/main_page.dart';
-import 'package:relay_43/screens/welcome_screen.dart';
 import 'package:modal_progress_hud_alt/modal_progress_hud_alt.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -94,7 +94,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             await _auth.signInWithEmailAndPassword(
                                 email: email!, password: password!);
                         if (newUser != null) {
-                          Navigator.pushNamed(context, MainPage.id);
+                          Navigator.pop(context);
+                          Navigator.pushReplacementNamed(context, MainPage.id);
                         }
                         setState(() {
                           showSpinner = false;

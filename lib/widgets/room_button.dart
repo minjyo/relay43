@@ -67,7 +67,7 @@ class _EnterWidget extends StatelessWidget {
           content: TextField(
             controller: _textFieldController,
             decoration: InputDecoration(hintText: "초대 코드 입력"),
-            keyboardType: TextInputType.number,
+            // keyboardType: TextInputType.number,
           ),
           actions: <Widget>[
             Row(
@@ -106,6 +106,7 @@ class _EnterWidget extends StatelessWidget {
                           .then( (flag){
                         if (flag == true){
                           Navigator.of(context).pop();
+                          DatabaseService().joinGroup(_textFieldController.text, email);
                           Navigator.push(context, MaterialPageRoute(builder: (context) =>
                               ChatPage(groupId: _textFieldController.text, userName: email,)));
                         }

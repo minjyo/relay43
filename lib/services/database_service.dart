@@ -63,7 +63,7 @@ class DatabaseService {
   }
   
   // 해당 그룹 채팅방에 참가하고 있는 사용자명 배열을 반환함
-  Future getUserInGroup(String groupId, String userEmail) async{
+  Future<dynamic> getUserInGroup(String groupId, String userEmail) async{
     var documentSnapshot = await groupCollection.doc(groupId).get();
     
     Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;

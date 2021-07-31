@@ -78,24 +78,17 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          // ElevatedButton(
-          //   onPressed: () => {
-          //     Navigator.push(context, MaterialPageRoute(builder: (context) =>
-          //         ChatPage(groupId: "KdZCkPfkXvdzyibD3aoP", userName: curUser!.email,)))
-          //   },
-          //   child: Text("테스트 채팅방"),
-          // ),
           SizedBox(
             height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RoomButton(Colors.red[300]!, textSet("방 만들기")),
+              RoomButton(Colors.red[300]!, textSet("방 만들기"), "make"),
               SizedBox(
                 width: 30,
               ),
-              RoomButton(Colors.blue[300]!, textSet("방 들어가기")),
+              RoomButton(Colors.blue[300]!, textSet("방 들어가기"), "enter"),
             ],
           ),
         ],

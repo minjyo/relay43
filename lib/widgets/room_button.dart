@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:flutter/services.dart';
 import 'package:relay_43/pages/chat_page.dart';
 import 'package:relay_43/services/database_service.dart';
 
@@ -68,12 +69,48 @@ class _EnterWidget extends StatelessWidget {
       ),
       actions: <Widget>[
         new ElevatedButton(
+          onPressed: (){
+            Clipboard.getData(Clipboard.kTextPlain).then((value){
+              print(value);
+              _textFieldController.text = value!.text!;
+            });
+          },
+          child: new Text('Paste',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              )),
+        ),
+        new ElevatedButton(
+          onPressed: (){
+            _textFieldController.clear();
+          },
+          child: new Text('Clear',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              )),
+        ),
+        new ElevatedButton(
           child: new Text('확인',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               )),
           onPressed: () {
-          Navigator.of(context).pop();
+            String email = FirebaseAuth.instance.currentUser!.email!;
+            DatabaseService().groupExists(_textFieldController.text)
+            .then( (flag){
+              if (flag == true){
+                Navigator.of(context).pop();
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                    ChatPage(groupId: _textFieldController.text, userName: email,)));
+              }
+              else{
+                _textFieldController.text = "방이 존재하지 않습니다.";
+              }
+            }
+            )
+            .catchError((err){
+              print(err);
+            });
         },
       )
     ],
@@ -109,7 +146,29 @@ class _MakeFormatState extends State<_MakeWidget>{
                 new ElevatedButton(
                   child: new Text(
                       '확인', style: TextStyle(fontWeight: FontWeight.bold,)),
-                  onPressed: () => {},
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          }
+          else if (snapshot.hasError){
+            return AlertDialog(
+              title: Text(
+                "문제 발생",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                ),
+              ),
+              actions: <Widget>[
+                new ElevatedButton(
+                  child: new Text(
+                      '확인', style: TextStyle(fontWeight: FontWeight.bold,)),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                 )
               ],
             );
@@ -136,10 +195,18 @@ class _MakeFormatState extends State<_MakeWidget>{
               actions: <Widget>[
                 new ElevatedButton(
                   child: new Text(
-                      '입장하기', style: TextStyle(fontWeight: FontWeight.bold,)),
+                      'COPY', style: TextStyle(fontWeight: FontWeight.bold,)),
                   onPressed: () => {
+                    Clipboard.setData(ClipboardData(text: snapshot.data.toString()))
+                  },
+                ),
+                new ElevatedButton(
+                  child: new Text(
+                      '입장하기', style: TextStyle(fontWeight: FontWeight.bold,)),
+                  onPressed: () {
+                    Navigator.of(context).pop();
                     Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                        ChatPage(groupId: snapshot.data.toString(), userName: email,)))
+                        ChatPage(groupId: snapshot.data.toString(), userName: email,)));
                   },
                 )
               ],

@@ -31,6 +31,12 @@ class DatabaseService {
     
     return true;
   }
+  // 그룹이 존재하는지 여부를 반환한다.
+  Future groupExists(String groupId) async{
+    DocumentReference groupDocRef = groupCollection.doc(groupId);
+    
+    return (await groupDocRef.get()).exists;
+  }
   
   // 그룹을 제거함
   Future deleteGroup(String groupId) async {

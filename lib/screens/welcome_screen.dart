@@ -23,27 +23,31 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           children: <Widget>[
             Center(
               child: Text(
-                  "Zzom",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 56,
-                color: Colors.lightBlue
-              ),),
+                "Zzom",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 56,
+                    color: Colors.lightBlue),
+              ),
             ),
             SizedBox(height: 200),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, LoginScreen.id);
-              },
-              child: Text("Log In"),
-            ),
-            SizedBox(height: 20),
-            OutlinedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, RegistrationScreen.id);
-              },
-              child: Text("Register"),
-            )
+            SizedBox(
+                height: 50.0,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, LoginScreen.id);
+                  },
+                  child: Text("Sign In"),
+                )),
+            SizedBox(height: 30),
+            SizedBox(
+                height: 50.0,
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, RegistrationScreen.id);
+                  },
+                  child: Text("Register"),
+                ))
           ],
         ),
       ),

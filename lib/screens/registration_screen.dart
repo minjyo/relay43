@@ -7,6 +7,7 @@ import 'package:modal_progress_hud_alt/modal_progress_hud_alt.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = 'registration_screen';
+
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
 }
@@ -16,7 +17,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool showSpinner = false;
   String? email;
   String? password;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,11 +30,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              Text(
+                "Register",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40,
+                    color: Colors.black54),
+              ),
+              SizedBox(
+                height: 32.0,
+              ),
               TextField(
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "ID"
-                ),
+                    border: OutlineInputBorder(), labelText: "ID"),
                 keyboardType: TextInputType.emailAddress,
                 // textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -41,43 +50,44 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 },
               ),
               SizedBox(
-                height: 16.0,
+                height: 24.0,
               ),
               TextField(
                 obscureText: true,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: "Password"
-                ),
+                    border: OutlineInputBorder(), labelText: "Password"),
                 // textAlign: TextAlign.center,
                 onChanged: (value) {
                   password = value;
                 },
               ),
               SizedBox(
-                height: 32.0,
+                height: 40.0,
               ),
-              ElevatedButton(
-                child: Text("Register"),
-                onPressed: () async {
-                  setState(() {
-                    showSpinner = true;
-                  });
-                  try {
-                    print("email : $email , password : $password");
-                    final dynamic newUser = await _auth.createUserWithEmailAndPassword(
-                        email: email!, password: password!);
-                    if (newUser != null) {
-                      Navigator.pushNamed(context, WelcomeScreen.id);
-                    }
-                    setState(() {
-                      showSpinner = false;
-                    });
-                  } catch (e) {
-                    print(e);
-                  }
-                },
-              )
+              SizedBox(
+                  height: 50.0,
+                  child: ElevatedButton(
+                    child: Text("Register"),
+                    onPressed: () async {
+                      setState(() {
+                        showSpinner = true;
+                      });
+                      try {
+                        print("email : $email , password : $password");
+                        final dynamic newUser =
+                            await _auth.createUserWithEmailAndPassword(
+                                email: email!, password: password!);
+                        if (newUser != null) {
+                          Navigator.pushNamed(context, WelcomeScreen.id);
+                        }
+                        setState(() {
+                          showSpinner = false;
+                        });
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                  ))
             ],
           ),
         ),

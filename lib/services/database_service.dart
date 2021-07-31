@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class DatabaseService {
-  // final CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
   final CollectionReference groupCollection = FirebaseFirestore.instance.collection('groups');
   
   // 그룹을 새로 만들고, 해당 그룹의 groupId를 반환
@@ -54,6 +53,12 @@ class DatabaseService {
   
   // 그룹을 제거함
   deleteGroup(String groupId) {
+    groupCollection.doc(groupId).collection('messages').get()
+    .then((snapshot){
+      snapshot.docs.forEach((element) {
+        element.reference.delete();
+      });
+    });
     groupCollection.doc(groupId).delete();
   }
   

@@ -17,6 +17,7 @@ class RoomButton extends StatelessWidget {
   _displayDialog(BuildContext context) async {
     return showDialog(
         context: context,
+        barrierDismissible: type == "make" ? false : true,
         builder: (context) {
           if (type == "make"){
             return _MakeWidget();
@@ -55,68 +56,74 @@ class _EnterWidget extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(
-        '방 초대코드 입력',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 22,
-        ),
-      ),
-      content: TextField(
-        controller: _textFieldController,
-        decoration: InputDecoration(hintText: "초대 코드 입력"),
-        keyboardType: TextInputType.number,
-      ),
-      actions: <Widget>[
-        new ElevatedButton(
-          onPressed: (){
-            Clipboard.getData(Clipboard.kTextPlain).then((value){
-              print(value);
-              _textFieldController.text = value!.text!;
-            });
-          },
-          child: new Text('Paste',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              )),
-        ),
-        new ElevatedButton(
-          onPressed: (){
-            _textFieldController.clear();
-          },
-          child: new Text('Clear',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              )),
-        ),
-        new ElevatedButton(
-          child: new Text('확인',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              )),
-          onPressed: () {
-            String email = FirebaseAuth.instance.currentUser!.email!;
-            DatabaseService().groupExists(_textFieldController.text)
-            .then( (flag){
-              if (flag == true){
-                Navigator.of(context).pop();
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                    ChatPage(groupId: _textFieldController.text, userName: email,)));
-              }
-              else{
-                Fluttertoast.showToast(msg: "방이 존재하지 않습니다.");
-                _textFieldController.text = "";
-              }
-            }
+   return AlertDialog(
+          title: Text(
+            '방 초대코드 입력',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 22,
+            ),
+          ),
+          content: TextField(
+            controller: _textFieldController,
+            decoration: InputDecoration(hintText: "초대 코드 입력"),
+            keyboardType: TextInputType.number,
+          ),
+          actions: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+
+                  ElevatedButton(
+                    onPressed: (){
+                      Clipboard.getData(Clipboard.kTextPlain).then((value){
+                        print(value);
+                        _textFieldController.text = value!.text!;
+                      });
+                    },
+                    child: new Text('Paste',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ),
+                  ElevatedButton(
+                    onPressed: (){
+                      _textFieldController.clear();
+                    },
+                    child: new Text('Clear',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ),
+                  ElevatedButton(
+                    child: new Text('확인',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        )),
+                    onPressed: () {
+                      String email = FirebaseAuth.instance.currentUser!.email!;
+                      DatabaseService().groupExists(_textFieldController.text)
+                          .then( (flag){
+                        if (flag == true){
+                          Navigator.of(context).pop();
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                              ChatPage(groupId: _textFieldController.text, userName: email,)));
+                        }
+                        else{
+                          Fluttertoast.showToast(msg: "방이 존재하지 않습니다.");
+                          _textFieldController.text = "";
+                        }
+                      }
+                      )
+                          .catchError((err){
+                        print(err);
+                      });
+                    },
+                  )
+                ]
             )
-            .catchError((err){
-              print(err);
-            });
-        },
-      )
-    ],
-  );
+        ],
+      );
   }
   
 }
@@ -195,21 +202,34 @@ class _MakeFormatState extends State<_MakeWidget>{
               ),
 
               actions: <Widget>[
-                new ElevatedButton(
-                  child: new Text(
-                      'COPY', style: TextStyle(fontWeight: FontWeight.bold,)),
-                  onPressed: () => {
-                    Clipboard.setData(ClipboardData(text: snapshot.data.toString()))
-                  },
-                ),
-                new ElevatedButton(
-                  child: new Text(
-                      '입장하기', style: TextStyle(fontWeight: FontWeight.bold,)),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                        ChatPage(groupId: snapshot.data.toString(), userName: email,)));
-                  },
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      child: new Text(
+                          '나가기', style: TextStyle(fontWeight: FontWeight.bold,)),
+                      onPressed: () {
+                        DatabaseService().exitGroup(snapshot.data.toString(), email);
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    ElevatedButton(
+                      child: new Text(
+                          'COPY', style: TextStyle(fontWeight: FontWeight.bold,)),
+                      onPressed: () => {
+                        Clipboard.setData(ClipboardData(text: snapshot.data.toString()))
+                      },
+                    ),
+                    ElevatedButton(
+                      child: new Text(
+                          '입장하기', style: TextStyle(fontWeight: FontWeight.bold,)),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                            ChatPage(groupId: snapshot.data.toString(), userName: email,)));
+                      },
+                    )
+                  ],
                 )
               ],
             );

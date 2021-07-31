@@ -30,9 +30,10 @@ class _ChatPageState extends State<ChatPage> {
           var snapData = snapshot.data;
           
           return ListView.builder(
-          
-            itemCount: snapData!.docs.length,
-            itemBuilder: (context, index){
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemCount: snapData!.docs.length,
+              itemBuilder: (context, index){
               Map<String, dynamic> data = snapData.docs[index].data() as Map<String, dynamic>;
               return MessageWidget(
                 data["message"] ,
@@ -57,7 +58,6 @@ class _ChatPageState extends State<ChatPage> {
       };
 
       DatabaseService().sendMessage(widget.groupId!, chatMessageMap);
-
       setState(() {
         messageEditingController.text = "";
       });
@@ -80,11 +80,11 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
         title: Text(widget.groupId!, style: TextStyle(color: Colors.white)),
         centerTitle: true,
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.blue,
         elevation: 0.0,
       ),
       body: Container(
-        child: Stack(
+        child: Column(
           children: <Widget>[
             _chatMessages(),
             // Container(),

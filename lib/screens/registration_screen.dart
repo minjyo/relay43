@@ -53,6 +53,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 24.0,
               ),
               TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Password'
+                ),
                 obscureText: true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(), labelText: "Password"),

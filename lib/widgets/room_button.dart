@@ -1,21 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 
-
 class RoomButton extends StatelessWidget {
   TextEditingController _textFieldController = TextEditingController();
   final Color base_color;
   final Text text;
 
   RoomButton(this.base_color, this.text);
-
-  // void _showInput(){
-  //   showDialog(
-  //     context: context,
-  //     builder: AlertDialog(
-  //     ),
-  //   )
-  // }
 
   _displayDialog(BuildContext context) async {
     return showDialog(

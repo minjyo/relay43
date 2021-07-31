@@ -43,7 +43,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: "ID"),
+
+                    border: OutlineInputBorder(),
+                    labelText: 'Email'
+                ),
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
                   email = value;
@@ -54,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Password"),
+                border: OutlineInputBorder(), labelText: "Password"),
                 obscureText: true,
                 onChanged: (value) {
                   password = value;

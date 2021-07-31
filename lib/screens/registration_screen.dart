@@ -30,7 +30,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           message = "패스워드는 6글자 이상으로 해주세요.";
           break;
         case "[firebase_auth/invalid-email] The email address is badly formatted.":
-          message = "잘못 된 이메일 형식입니다.";
+          message = "잘못된 이메일 형식입니다.";
           break;
         default:
       }
@@ -98,26 +98,27 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         setState(() {
                           showSpinner = false;
                         });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("회원가입이 완료되었습니다."),
+                          ),
+                        );
+                        Navigator.pop(context);
                       } catch (e) {
                         setState(() {
                           showSpinner = false;
                         });
-                        String message = makeRegisterErrorMessage(e.toString());
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              content: new Text(message),
-                              actions: <Widget>[
-                                new FlatButton(
-                                  child: new Text("확인"),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ],
-                            );
-                          },
+                        String msg = makeRegisterErrorMessage(e.toString());
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(msg),
+                            // action: SnackBarAction(
+                            //   label: 'Action',
+                            //   onPressed: () {
+                            //     // Code to execute.
+                            //   },
+                            // ),
+                          ),
                         );
                       }
                     },

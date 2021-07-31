@@ -31,11 +31,15 @@ class RoomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 120.0,
-      height: 120.0,
+      width: 150.0,
+      height: 80.0,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          elevation: 8.0,
           primary: base_color,
+          shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0),
+          ),
         ),
         onPressed: () => _displayDialog(context),
         child: text,

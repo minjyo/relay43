@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:relay_43/pages/chat_page.dart';
@@ -7,7 +6,7 @@ import 'package:relay_43/widgets/room_button.dart';
 
 class MainPage extends StatelessWidget {
   static const String id = 'home_page';
-  
+
   MainPage({Key? key, required this.title});
 
   final String title;
@@ -27,7 +26,7 @@ class MainPage extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title});
   final String title;
-  
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -54,8 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
     }
+
     User? curUser = FirebaseAuth.instance.currentUser;
-    
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(56.0),

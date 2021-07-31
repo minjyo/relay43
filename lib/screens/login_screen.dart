@@ -108,12 +108,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(msg),
-                            // action: SnackBarAction(
-                            //   label: 'Action',
-                            //   onPressed: () {
-                            //     // Code to execute.
-                            //   },
-                            // ),
                           ),
                         );
                       }

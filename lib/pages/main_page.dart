@@ -33,7 +33,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
   @override
   Widget build(BuildContext context) {
     // final Future<FirebaseApp> _initialization = Firebase.initializeApp();
@@ -58,33 +57,41 @@ class _MyHomePageState extends State<MyHomePage> {
     User? curUser = FirebaseAuth.instance.currentUser;
     
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.title,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 30,
-          ),
-        ),
-      ),
-      body: Center(
-        child: Row(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(56.0),
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () => {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => 
-                    ChatPage(groupId: "KdZCkPfkXvdzyibD3aoP", userName: curUser!.email,)))
-              }, 
-              child: Text("테스트 채팅방"),
+          children: [
+            AppBar(
+              title: Text(
+                widget.title,
+                style: TextStyle(
+                  fontFamily: "boorsok",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 45,
+                ),
+              ),
             ),
-            RoomButton(Colors.red[300]!, textSet("방 만들기"), "make"),
-            SizedBox(
-              width: 50,
-            ),
-            RoomButton(Colors.blue[300]!, textSet("방 들어가기"), "enter"),
           ],
         ),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RoomButton(Colors.red[300]!, textSet("방 만들기"), "make"),
+              SizedBox(
+                width: 30,
+              ),
+              RoomButton(Colors.blue[300]!, textSet("방 들어가기"), "enter"),
+            ],
+          ),
+        ],
       ),
     );
   }

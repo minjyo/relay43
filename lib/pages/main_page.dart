@@ -78,11 +78,11 @@ class _MyHomePageState extends State<MyHomePage> {
               }, 
               child: Text("테스트 채팅방"),
             ),
-            RoomButton(Colors.red[300]!, textSet("방 만들기")),
+            RoomButton(Colors.red[300]!, textSet("방 만들기"), "make"),
             SizedBox(
               width: 50,
             ),
-            RoomButton(Colors.blue[300]!, textSet("방 들어가기")),
+            RoomButton(Colors.blue[300]!, textSet("방 들어가기"), "enter"),
           ],
         ),
       ),

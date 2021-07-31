@@ -30,26 +30,34 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "ID"
+                ),
                 keyboardType: TextInputType.emailAddress,
-                textAlign: TextAlign.center,
+                // textAlign: TextAlign.center,
                 onChanged: (value) {
                   email = value;
                 },
               ),
               SizedBox(
-                height: 8.0,
+                height: 16.0,
               ),
               TextField(
                 obscureText: true,
-                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Password"
+                ),
+                // textAlign: TextAlign.center,
                 onChanged: (value) {
                   password = value;
                 },
               ),
               SizedBox(
-                height: 24.0,
+                height: 32.0,
               ),
-              TextButton(
+              ElevatedButton(
                 child: Text("Register"),
                 onPressed: () async {
                   setState(() {

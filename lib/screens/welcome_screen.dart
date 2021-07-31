@@ -31,13 +31,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               ),),
             ),
             SizedBox(height: 200),
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, LoginScreen.id);
               },
               child: Text("Log In"),
             ),
-            TextButton(
+            SizedBox(height: 20),
+            OutlinedButton(
               onPressed: () {
                 Navigator.pushNamed(context, RegistrationScreen.id);
               },

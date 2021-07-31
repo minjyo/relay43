@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:relay_43/services/database_service.dart';
 import 'package:relay_43/widgets/message_widget.dart';
 
@@ -22,7 +23,8 @@ class _ChatPageState extends State<ChatPage> with WidgetsBindingObserver{
   Stream<QuerySnapshot>? _chats;
   TextEditingController messageEditingController = new TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  
+  final ScrollController _userScrollController = ScrollController();
+
   Widget _chatMessages(){
     return StreamBuilder(
       stream: _chats,
@@ -149,11 +151,110 @@ class _ChatPageState extends State<ChatPage> with WidgetsBindingObserver{
       onWillPop: () => _onBackPressed(context),
       child:
         Scaffold(
+          endDrawer: Drawer(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  height: 100,
+                  child: DrawerHeader(
+
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                    ),
+                    padding: EdgeInsets.all(0),
+                    child: Center(
+                      child: Text(
+                        widget.userName.toString(),
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                  child: Center(
+                      child: Text('참여자',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            fontSize: 24.0
+                        ),
+                      )
+                  ),
+                ),
+                Container(
+                    child: FutureBuilder<dynamic>(
+                        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                          if(snapshot.hasData) {
+                            // return Text('$snapshot.data');
+                            List snapData = snapshot.data;
+                            print(snapData);
+                            return ListView.builder(
+                                controller: _userScrollController,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemCount: snapData.length,
+                                itemBuilder: (context, index){
+                                  String user = snapData[index];
+                                  return Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(user,
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                          fontSize: 22,
+                                        ),),
+                                    ),
+                                  );
+                                }
+                            );
+                          }
+                          return Container(child: Text('참여자가 없습니다.', style: TextStyle(fontSize: 20),));
+                        },
+                        future: DatabaseService().getUserInGroup(widget.groupId!, widget.userName!)
+                    )
+                )
+              ],
+            ),
+
+          ),
         appBar: AppBar(
-          title: Text(widget.groupId!, style: TextStyle(color: Colors.white)),
+          title: Text(widget.groupId!, style: TextStyle(color: Colors.white, fontSize: 18)),
           centerTitle: true,
           backgroundColor: Colors.blue,
           elevation: 0.0,
+            leading: BackButton(
+              color: Colors.white,
+            ),
+            actions: [
+              IconButton(
+                icon: new Icon(Icons.copy),
+                tooltip: '입장 코드 복사',
+                onPressed: () => {
+                  Clipboard.setData(ClipboardData(text: widget.groupId)),
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("입장 코드가 복사되었습니다."),
+                    ),
+                  ),
+                },
+              ),
+              Builder(
+                  builder: (context) =>
+                      IconButton(
+                        icon: new Icon(Icons.people),
+                        tooltip: '참여자 목록',
+                        onPressed: () => {
+                          Scaffold.of(context).openEndDrawer(),
+                        },
+                      )
+              )
+            ]
         ),
         body: Container(
           child: Column(

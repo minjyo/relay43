@@ -84,7 +84,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           showSpinner = false;
                         });
                       } catch (e) {
+                        var msg = e.toString();
                         print(e);
+                        setState(() {
+                          showSpinner = false;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(msg),
+                            // action: SnackBarAction(
+                            //   label: 'Action',
+                            //   onPressed: () {
+                            //     // Code to execute.
+                            //   },
+                            // ),
+                          ),
+                        );
                       }
                     },
                   ))

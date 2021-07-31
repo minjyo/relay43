@@ -83,7 +83,22 @@ class _LoginScreenState extends State<LoginScreen> {
                           showSpinner = false;
                         });
                       } catch (e) {
+                        var msg = e.toString();
                         print(e);
+                        setState(() {
+                          showSpinner = false;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(msg),
+                            // action: SnackBarAction(
+                            //   label: 'Action',
+                            //   onPressed: () {
+                            //     // Code to execute.
+                            //   },
+                            // ),
+                          ),
+                        );
                       }
                     },
                   ))

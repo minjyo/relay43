@@ -31,6 +31,20 @@ class DatabaseService {
     
     return true;
   }
+  exitGroup(String groupId, String userEmail) async {
+    DocumentReference groupDocRef = groupCollection.doc(groupId);
+
+
+    await groupDocRef.update({
+      'members': FieldValue.arrayRemove([userEmail])
+    });
+    
+    Map<String, dynamic> data = (await groupDocRef.get()).data() as Map<String, dynamic>;
+    if (data['members'].length <= 0){
+      deleteGroup(groupId);
+    }
+  }
+  
   // 그룹이 존재하는지 여부를 반환한다.
   Future groupExists(String groupId) async{
     DocumentReference groupDocRef = groupCollection.doc(groupId);
@@ -39,7 +53,8 @@ class DatabaseService {
   }
   
   // 그룹을 제거함
-  Future deleteGroup(String groupId) async {
+  deleteGroup(String groupId) {
+    groupCollection.doc(groupId).delete();
   }
   
   // 해당 그룹 채팅방에 참가하고 있는 사용자명 배열을 반환함

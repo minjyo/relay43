@@ -22,6 +22,7 @@ class _ChatPageState extends State<ChatPage> {
   Stream<QuerySnapshot>? _chats;
   TextEditingController messageEditingController = new TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  
   Widget _chatMessages(Function callback){
     return StreamBuilder(
       stream: _chats,
@@ -90,72 +91,101 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 
+  _onBackPressed(BuildContext context){
+    return showDialog( 
+        context: context, 
+        builder: (context) => AlertDialog( 
+          title: Text('채팅방을 나가시겠습니까?'), 
+          actions: <Widget>[
+            ElevatedButton( 
+              child: Text('No'), 
+              onPressed: (){
+                Navigator.pop(context);
+                },
+            ), 
+            ElevatedButton( 
+              child: Text('Yes'),
+              onPressed: (){
+                DatabaseService().exitGroup(widget.groupId!, widget.userName!);
+                
+                Navigator.pop(context);
+                Navigator.pop(context);
+                },
+            ),
+          ]
+        )
+    );
+  }
 
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.groupId!, style: TextStyle(color: Colors.white)),
-        centerTitle: true,
-        backgroundColor: Colors.blue,
-        elevation: 0.0,
-      ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            _chatMessages(_scrollCallBack),
-            Divider(
+    return WillPopScope(
+      onWillPop: () => _onBackPressed(context),
+      child:
+        Scaffold(
+        appBar: AppBar(
+          title: Text(widget.groupId!, style: TextStyle(color: Colors.white)),
+          centerTitle: true,
+          backgroundColor: Colors.blue,
+          elevation: 0.0,
+        ),
+        body: Container(
+          child: Column(
+            children: <Widget>[
+              _chatMessages(_scrollCallBack),
+              Divider(
                 color: Colors.black,
                 thickness: 1,
-            ),
-            // Container(),
-            Container(
-              alignment: Alignment.bottomCenter,
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-                color: Colors.white,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: TextField(
-                        controller: messageEditingController,
-                        style: TextStyle(
-                            color: Colors.black87
-                        ),
-                        decoration: InputDecoration(
-                            hintText: "Send a message ...",
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 16,
-                            ),
-                            border: InputBorder.none
-                        ),
-                      ),
-                    ),
-
-                    SizedBox(width: 12.0),
-
-                    GestureDetector(
-                      onTap: () {
-                        _sendMessage();
-                      },
-                      child: Container(
-                        height: 50.0,
-                        width: 50.0,
-                        decoration: BoxDecoration(
-                            color: Colors.blueAccent,
-                            borderRadius: BorderRadius.circular(50)
-                        ),
-                        child: Center(child: Icon(Icons.send, color: Colors.white)),
-                      ),
-                    )
-                  ],
-                ),
               ),
-            )
-          ],
+              // Container(),
+              Container(
+                alignment: Alignment.bottomCenter,
+                width: MediaQuery.of(context).size.width,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+                  color: Colors.white,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: TextField(
+                          controller: messageEditingController,
+                          style: TextStyle(
+                              color: Colors.black87
+                          ),
+                          decoration: InputDecoration(
+                              hintText: "Send a message ...",
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16,
+                              ),
+                              border: InputBorder.none
+                          ),
+                        ),
+                      ),
+  
+                      SizedBox(width: 12.0),
+  
+                      GestureDetector(
+                        onTap: () {
+                          _sendMessage();
+                        },
+                        child: Container(
+                          height: 50.0,
+                          width: 50.0,
+                          decoration: BoxDecoration(
+                              color: Colors.blueAccent,
+                              borderRadius: BorderRadius.circular(50)
+                          ),
+                          child: Center(child: Icon(Icons.send, color: Colors.white)),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -6,6 +6,7 @@ import 'package:modal_progress_hud_alt/modal_progress_hud_alt.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -22,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
     String message = "";
     switch (e) {
       case "[firebase_auth/invalid-email] The email address is badly formatted.":
-        message = "잘못된 이메일 형식입니다";
+        message = "잘못된 이메일 형식입니다.";
         break;
       case "[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.":
         message = "존재하지 않는 이메일입니다.";
@@ -47,37 +48,42 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              Text(
+                "Sign In",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40,
+                    color: Colors.black54),
+              ),
+              SizedBox(
+                height: 32.0,
+              ),
               TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Email'),
+                    border: OutlineInputBorder(), labelText: "ID"),
                 keyboardType: TextInputType.emailAddress,
-                textAlign: TextAlign.center,
                 onChanged: (value) {
                   email = value;
                 },
               ),
               SizedBox(
-                height: 8.0,
+                height: 24.0,
               ),
               TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Password'),
-                textAlign: TextAlign.center,
+                    border: OutlineInputBorder(), labelText: "Password"),
                 obscureText: true,
                 onChanged: (value) {
                   password = value;
                 },
               ),
               SizedBox(
-                height: 24.0,
+                height: 40.0,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  MaterialButton(
-                    child: Text("Log In"),
-                    color: Colors.blue,
-                    textColor: Colors.white,
+              SizedBox(
+                  height: 50.0,
+                  child: ElevatedButton(
+                    child: Text("Sign In"),
                     onPressed: () async {
                       setState(() {
                         showSpinner = true;
@@ -94,32 +100,25 @@ class _LoginScreenState extends State<LoginScreen> {
                           showSpinner = false;
                         });
                       } catch (e) {
+                        var msg = makeLoginErrorMessage(e.toString());
+                        print(e);
                         setState(() {
                           showSpinner = false;
                         });
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            String message =
-                                makeLoginErrorMessage(e.toString());
-                            return AlertDialog(
-                              content: new Text(message),
-                              actions: <Widget>[
-                                new FlatButton(
-                                  child: new Text("확인"),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ],
-                            );
-                          },
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(msg),
+                            // action: SnackBarAction(
+                            //   label: 'Action',
+                            //   onPressed: () {
+                            //     // Code to execute.
+                            //   },
+                            // ),
+                          ),
                         );
                       }
                     },
-                  ),
-                ],
-              )
+                  ))
             ],
           ),
         ),

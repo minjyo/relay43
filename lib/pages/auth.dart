@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:relay_43/pages/main_page.dart';
-import 'package:relay_43/screens/login_screen.dart';
-import 'package:relay_43/screens/registration_screen.dart';
-import 'package:relay_43/screens/welcome_screen.dart';
+import 'package:relay_43/pages/login_page.dart';
+import 'package:relay_43/pages/registration_page.dart';
+import 'package:relay_43/pages/welcome_page.dart';
 
 class AuthPage extends StatelessWidget {
   AuthPage({Key? key, required this.title});
@@ -13,16 +13,16 @@ class AuthPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: WelcomeScreen.id,
+      initialRoute: WelcomePage.id,
       title: title,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       // home: MyHomeStatePage(title: this.title),
       routes: {
-        WelcomeScreen.id: (context) => WelcomeScreen(),
-        LoginScreen.id: (context) => LoginScreen(),
-        RegistrationScreen.id: (context) => RegistrationScreen(),
+        WelcomePage.id: (context) => WelcomePage(),
+        LoginPage.id: (context) => LoginPage(),
+        RegistrationPage.id: (context) => RegistrationPage(),
         MainPage.id: (context) => MainPage(title: title),
       },
     );

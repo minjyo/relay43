@@ -103,7 +103,8 @@ class _ChatPageState extends State<ChatPage> with WidgetsBindingObserver{
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     switch(state){
-      case AppLifecycleState.paused:
+      // 오래동안 백그라운드에 있는 경우, 채팅방을 나가도록 함.
+      // 강제종료에 대해서는 Flutter 단에서 처리할 방법이 없는 듯 함...
       case AppLifecycleState.detached:
         DatabaseService().exitGroup(widget.groupId!, widget.userName!);
         Navigator.pop(context);

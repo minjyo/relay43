@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:relay_43/pages/auth.dart';
 import 'package:relay_43/pages/main_page.dart';
 
-
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -15,7 +13,7 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp>{
+class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   @override
@@ -24,7 +22,6 @@ class _MyAppState extends State<MyApp>{
       // Initialize FlutterFire:
       future: _initialization,
       builder: (context, snapshot) {
-
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
           return AuthPage(title: 'ZZom');
@@ -37,24 +34,15 @@ class _MyAppState extends State<MyApp>{
   }
 }
 
-class Loading extends StatelessWidget{
-
+class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Test",
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Loading")
-        ),
-        body: Column(
-          children: [
-            Center(
-              child: Text("Loading")
-            )
-          ],
-        )
-      )
-    );
+        title: "Test",
+        home: Scaffold(
+            appBar: AppBar(title: Text("Loading")),
+            body: Column(
+              children: [Center(child: Text("Loading"))],
+            )));
   }
 }

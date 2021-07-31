@@ -21,6 +21,16 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            Center(
+              child: Text(
+                  "Zzom",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 56,
+                color: Colors.lightBlue
+              ),),
+            ),
+            SizedBox(height: 200),
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, LoginScreen.id);

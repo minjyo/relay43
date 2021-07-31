@@ -21,6 +21,21 @@ class DatabaseService {
     return groupDocRef.id;
   }
   
+  // 그룹에 참가함
+  Future joinGroup(String groupId, String userEmail) async{
+    DocumentReference groupDocRef = groupCollection.doc(groupId);
+    
+    await groupDocRef.update({
+      'members': FieldValue.arrayUnion([userEmail])
+    });
+    
+    return true;
+  }
+  
+  // 그룹을 제거함
+  Future deleteGroup(String groupId) async {
+  }
+  
   // 해당 그룹 채팅방에 참가하고 있는 사용자명 배열을 반환함
   Future getUserInGroup(String groupId, String userEmail) async{
     var documentSnapshot = await groupCollection.doc(groupId).get();

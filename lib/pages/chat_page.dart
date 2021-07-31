@@ -80,7 +80,7 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
         title: Text(widget.groupId!, style: TextStyle(color: Colors.white)),
         centerTitle: true,
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.blue,
         elevation: 0.0,
       ),
       body: Container(

@@ -31,6 +31,10 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Email'
+                ),
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -41,6 +45,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 8.0,
               ),
               TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Password'
+                ),
                 textAlign: TextAlign.center,
                 obscureText: true,
                 onChanged: (value) {
@@ -50,26 +58,33 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 24.0,
               ),
-              TextButton(
-                child: Text("Log In"),
-                onPressed: () async {
-                  setState(() {
-                    showSpinner = true;
-                  });
-                  try {
-                    print("email : $email , password : $password");
-                    final dynamic newUser = await _auth.signInWithEmailAndPassword(
-                        email: email!, password: password!);
-                    if (newUser != null) {
-                      Navigator.pushNamed(context, MainPage.id);
-                    }
-                    setState(() {
-                      showSpinner = false;
-                    });
-                  } catch (e) {
-                    print(e);
-                  }
-                },
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MaterialButton(
+                    child: Text("Log In"),
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    onPressed: () async {
+                      setState(() {
+                        showSpinner = true;
+                      });
+                      try {
+                        print("email : $email , password : $password");
+                        final dynamic newUser = await _auth.signInWithEmailAndPassword(
+                            email: email!, password: password!);
+                        if (newUser != null) {
+                          Navigator.pushNamed(context, MainPage.id);
+                        }
+                        setState(() {
+                          showSpinner = false;
+                        });
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                  ),
+                ],
               )
             ],
           ),

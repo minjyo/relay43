@@ -30,6 +30,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Email'
+                ),
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -40,6 +44,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 8.0,
               ),
               TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Password'
+                ),
                 obscureText: true,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -49,26 +57,33 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               SizedBox(
                 height: 24.0,
               ),
-              TextButton(
-                child: Text("Register"),
-                onPressed: () async {
-                  setState(() {
-                    showSpinner = true;
-                  });
-                  try {
-                    print("email : $email , password : $password");
-                    final dynamic newUser = await _auth.createUserWithEmailAndPassword(
-                        email: email!, password: password!);
-                    if (newUser != null) {
-                      Navigator.pushNamed(context, WelcomeScreen.id);
-                    }
-                    setState(() {
-                      showSpinner = false;
-                    });
-                  } catch (e) {
-                    print(e);
-                  }
-                },
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MaterialButton(
+                    child: Text("Register"),
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    onPressed: () async {
+                      setState(() {
+                        showSpinner = true;
+                      });
+                      try {
+                        print("email : $email , password : $password");
+                        final dynamic newUser = await _auth.createUserWithEmailAndPassword(
+                            email: email!, password: password!);
+                        if (newUser != null) {
+                          Navigator.pushNamed(context, WelcomeScreen.id);
+                        }
+                        setState(() {
+                          showSpinner = false;
+                        });
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                  ),
+                ],
               )
             ],
           ),

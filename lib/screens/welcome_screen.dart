@@ -22,7 +22,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
               child: SizedBox(
                 height: 100,
                 width: 350,
@@ -40,9 +40,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               // child: Image.asset('images/logo.png')),
             ),
             SizedBox(
-              height: 300,
+              height: 220,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(40, 0, 0, 80),
+                padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [

@@ -70,6 +70,18 @@ class _EnterWidget extends StatelessWidget {
       actions: <Widget>[
         new ElevatedButton(
           onPressed: (){
+            Clipboard.getData(Clipboard.kTextPlain).then((value){
+              print(value);
+              _textFieldController.text = value!.text!;
+            });
+          },
+          child: new Text('Paste',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              )),
+        ),
+        new ElevatedButton(
+          onPressed: (){
             _textFieldController.clear();
           },
           child: new Text('Clear',

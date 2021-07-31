@@ -43,10 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               TextField(
                 decoration: InputDecoration(
-
-                    border: OutlineInputBorder(),
-                    labelText: 'Email'
-                ),
+                    border: OutlineInputBorder(), labelText: "ID"),
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
                   email = value;
@@ -57,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               TextField(
                 decoration: InputDecoration(
-                border: OutlineInputBorder(), labelText: "Password"),
+                    border: OutlineInputBorder(), labelText: "Password"),
                 obscureText: true,
                 onChanged: (value) {
                   password = value;
@@ -77,8 +74,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       try {
                         print("email : $email , password : $password");
                         final dynamic newUser =
-                            await _auth.signInWithEmailAndPassword(
-                                email: email!, password: password!);
+                        await _auth.signInWithEmailAndPassword(
+                            email: email!, password: password!);
                         if (newUser != null) {
                           Navigator.pushNamed(context, MainPage.id);
                         }

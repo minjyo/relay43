@@ -53,10 +53,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 24.0,
               ),
               TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password'
-                ),
                 obscureText: true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(), labelText: "Password"),
@@ -79,8 +75,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       try {
                         print("email : $email , password : $password");
                         final dynamic newUser =
-                            await _auth.createUserWithEmailAndPassword(
-                                email: email!, password: password!);
+                        await _auth.createUserWithEmailAndPassword(
+                            email: email!, password: password!);
                         if (newUser != null) {
                           Navigator.pushNamed(context, WelcomeScreen.id);
                         }

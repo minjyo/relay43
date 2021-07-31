@@ -13,10 +13,27 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool showSpinner = false;
-  
+
   User? loggedInUser;
   String? email;
   String? password;
+
+  String makeLoginErrorMessage(String e) {
+    String message = "";
+    switch (e) {
+      case "[firebase_auth/invalid-email] The email address is badly formatted.":
+        message = "잘못된 이메일 형식입니다";
+        break;
+      case "[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.":
+        message = "존재하지 않는 이메일입니다.";
+        break;
+      case "[firebase_auth/wrong-password] The password is invalid or the user does not have a password.":
+        message = "잘못 된 패스워드 입니다.";
+        break;
+      default:
+    }
+    return message;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
             children: <Widget>[
               TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Email'
-                ),
+                    border: OutlineInputBorder(), labelText: 'Email'),
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -46,9 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password'
-                ),
+                    border: OutlineInputBorder(), labelText: 'Password'),
                 textAlign: TextAlign.center,
                 obscureText: true,
                 onChanged: (value) {
@@ -71,8 +84,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       });
                       try {
                         print("email : $email , password : $password");
-                        final dynamic newUser = await _auth.signInWithEmailAndPassword(
-                            email: email!, password: password!);
+                        final dynamic newUser =
+                            await _auth.signInWithEmailAndPassword(
+                                email: email!, password: password!);
                         if (newUser != null) {
                           Navigator.pushNamed(context, MainPage.id);
                         }
@@ -80,7 +94,27 @@ class _LoginScreenState extends State<LoginScreen> {
                           showSpinner = false;
                         });
                       } catch (e) {
-                        print(e);
+                        setState(() {
+                          showSpinner = false;
+                        });
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            String message =
+                                makeLoginErrorMessage(e.toString());
+                            return AlertDialog(
+                              content: new Text(message),
+                              actions: <Widget>[
+                                new FlatButton(
+                                  child: new Text("확인"),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       }
                     },
                   ),

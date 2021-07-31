@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:relay_43/pages/chat_page.dart';
 import 'package:relay_43/services/database_service.dart';
 
@@ -104,7 +105,8 @@ class _EnterWidget extends StatelessWidget {
                     ChatPage(groupId: _textFieldController.text, userName: email,)));
               }
               else{
-                _textFieldController.text = "방이 존재하지 않습니다.";
+                Fluttertoast.showToast(msg: "방이 존재하지 않습니다.");
+                _textFieldController.text = "";
               }
             }
             )

@@ -19,6 +19,23 @@ class _LoginScreenState extends State<LoginScreen> {
   String? email;
   String? password;
 
+  String makeLoginErrorMessage(String e) {
+    String message = "";
+    switch (e) {
+      case "[firebase_auth/invalid-email] The email address is badly formatted.":
+        message = "잘못된 이메일 형식입니다.";
+        break;
+      case "[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.":
+        message = "존재하지 않는 이메일입니다.";
+        break;
+      case "[firebase_auth/wrong-password] The password is invalid or the user does not have a password.":
+        message = "잘못 된 패스워드 입니다.";
+        break;
+      default:
+    }
+    return message;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           showSpinner = false;
                         });
                       } catch (e) {
-                        var msg = e.toString();
+                        var msg = makeLoginErrorMessage(e.toString());
                         print(e);
                         setState(() {
                           showSpinner = false;

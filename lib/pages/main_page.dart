@@ -1,9 +1,7 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:relay_43/pages/chat_page.dart';
-import 'package:relay_43/screens/welcome_screen.dart';
-import 'package:relay_43/screens/login_screen.dart';
-import 'package:relay_43/screens/registration_screen.dart';
 
 import 'package:relay_43/widgets/room_button.dart';
 
@@ -35,10 +33,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _incrementCounter() {
-    setState(() {});
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     // final Future<FirebaseApp> _initialization = Firebase.initializeApp();
@@ -60,7 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
     }
-
+    User? curUser = FirebaseAuth.instance.currentUser;
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -77,7 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             ElevatedButton(
               onPressed: () => {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(groupId: "KdZCkPfkXvdzyibD3aoP", userName: "test",)))
+                Navigator.push(context, MaterialPageRoute(builder: (context) => 
+                    ChatPage(groupId: "KdZCkPfkXvdzyibD3aoP", userName: curUser!.email,)))
               }, 
               child: Text("테스트 채팅방"),
             ),

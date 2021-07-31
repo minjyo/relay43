@@ -93,7 +93,7 @@ class _WelcomePageState extends State<WelcomePage>
                         Navigator.pushNamed(context, RegistrationPage.id);
                       },
                       child: Text(
-                        "SIGN IN",
+                        "SIGN UP",
                         style: TextStyle(
                           // fontFamily: "boorsok",
                           letterSpacing: 1.0,

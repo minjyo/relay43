@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                "Sign In",
+                "Log In",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 40,
@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: "ID"),
+                    border: OutlineInputBorder(), labelText: "Email"),
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
                   email = value;
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                   height: 50.0,
                   child: ElevatedButton(
-                    child: Text("Sign In"),
+                    child: Text("Log In"),
                     onPressed: () async {
                       setState(() {
                         showSpinner = true;

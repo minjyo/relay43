@@ -48,7 +48,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                "Register",
+                "Sign Up",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 40,
@@ -59,7 +59,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: "ID"),
+                    border: OutlineInputBorder(), labelText: "Email"),
                 keyboardType: TextInputType.emailAddress,
                 // textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -84,7 +84,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               SizedBox(
                   height: 50.0,
                   child: ElevatedButton(
-                    child: Text("Register"),
+                    child: Text("Sign Up"),
                     onPressed: () async {
                       setState(() {
                         showSpinner = true;

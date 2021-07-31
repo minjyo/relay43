@@ -7,6 +7,7 @@ import 'package:modal_progress_hud_alt/modal_progress_hud_alt.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id = 'registration_screen';
+
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
 }
@@ -16,7 +17,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool showSpinner = false;
   String? email;
   String? password;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,19 +30,27 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              Text(
+                "Register",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40,
+                    color: Colors.black54),
+              ),
+              SizedBox(
+                height: 32.0,
+              ),
               TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Email'
-                ),
+                    border: OutlineInputBorder(), labelText: "ID"),
                 keyboardType: TextInputType.emailAddress,
-                textAlign: TextAlign.center,
+                // textAlign: TextAlign.center,
                 onChanged: (value) {
                   email = value;
                 },
               ),
               SizedBox(
-                height: 8.0,
+                height: 24.0,
               ),
               TextField(
                 decoration: InputDecoration(
@@ -49,29 +58,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     labelText: 'Password'
                 ),
                 obscureText: true,
-                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(), labelText: "Password"),
+                // textAlign: TextAlign.center,
                 onChanged: (value) {
                   password = value;
                 },
               ),
               SizedBox(
-                height: 24.0,
+                height: 40.0,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  MaterialButton(
+              SizedBox(
+                  height: 50.0,
+                  child: ElevatedButton(
                     child: Text("Register"),
-                    color: Colors.blue,
-                    textColor: Colors.white,
                     onPressed: () async {
                       setState(() {
                         showSpinner = true;
                       });
                       try {
                         print("email : $email , password : $password");
-                        final dynamic newUser = await _auth.createUserWithEmailAndPassword(
-                            email: email!, password: password!);
+                        final dynamic newUser =
+                            await _auth.createUserWithEmailAndPassword(
+                                email: email!, password: password!);
                         if (newUser != null) {
                           Navigator.pushNamed(context, WelcomeScreen.id);
                         }
@@ -79,12 +88,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           showSpinner = false;
                         });
                       } catch (e) {
+                        var msg = e.toString();
                         print(e);
+                        setState(() {
+                          showSpinner = false;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(msg),
+                            // action: SnackBarAction(
+                            //   label: 'Action',
+                            //   onPressed: () {
+                            //     // Code to execute.
+                            //   },
+                            // ),
+                          ),
+                        );
                       }
                     },
-                  ),
-                ],
-              )
+                  ))
             ],
           ),
         ),

@@ -21,124 +21,33 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 150, 0, 0),
-              child: SizedBox(
-                height: 100,
-                width: 350,
-                child: Text(
-                  "ZZom",
-                  style: TextStyle(
-                      fontFamily: "boorsok",
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 5.0,
-                      fontSize: 100,
-                      color: Colors.blue[400]),
-                  textAlign: TextAlign.center,
-                ),
+            Center(
+              child: Text(
+                "Zzom",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 56,
+                    color: Colors.lightBlue),
               ),
-              // child: Image.asset('images/logo.png')),
             ),
+            SizedBox(height: 200),
             SizedBox(
-              height: 300,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(40, 0, 0, 80),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      "INVITE",
-                      style: TextStyle(
-                        color: Colors.grey[300],
-                        fontWeight: FontWeight.bold,
-                        fontSize: 28,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "YOUR",
-                      style: TextStyle(
-                        color: Colors.grey[300],
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "TEAM",
-                      style: TextStyle(
-                        color: Colors.grey[300],
-                        fontWeight: FontWeight.bold,
-                        fontSize: 50,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 60.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 3000.0,
-                    height: 60.0,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, RegistrationScreen.id);
-                      },
-                      child: Text(
-                        "SIGN IN",
-                        style: TextStyle(
-                          // fontFamily: "boorsok",
-                          letterSpacing: 1.0,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.blue[400],
-                          onPrimary: Colors.white,
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0),
-                          )),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    width: 3000.0,
-                    height: 60.0,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, LoginScreen.id);
-                      },
-                      child: Text(
-                        "LOG IN",
-                        style: TextStyle(
-                          // fontFamily: "boorsok",
-                          letterSpacing: 1.0,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.blue[400],
-                          onPrimary: Colors.white,
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0),
-                          )),
-                    ),
-                  ),
-                ],
-              ),
-            )
+                height: 50.0,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, LoginScreen.id);
+                  },
+                  child: Text("Sign In"),
+                )),
+            SizedBox(height: 30),
+            SizedBox(
+                height: 50.0,
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, RegistrationScreen.id);
+                  },
+                  child: Text("Register"),
+                ))
           ],
         ),
       ),

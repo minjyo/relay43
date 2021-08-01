@@ -35,7 +35,7 @@
 
   | 이름                                              | 한마디 |
   | :------------------------------------------------ | ------ |
-  | [**J022_김동환**](https://github.com/gidskql6671) |        |
+  | [**J022_김동환**](https://github.com/gidskql6671) |   좋은 경험이었어요   |
   | **J051_김재훈**                                   |        |
   | [**J063_김필선**](https://github.com/psunny0104)  |        |
   | **[J130_유정한](https://github.com/youjeonghan)** |        |

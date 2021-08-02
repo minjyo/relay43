@@ -2,17 +2,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:relay_43/screens/welcome_screen.dart';
+import 'package:relay_43/pages/welcome_page.dart';
 import 'package:modal_progress_hud_alt/modal_progress_hud_alt.dart';
 
-class RegistrationScreen extends StatefulWidget {
+class RegistrationPage extends StatefulWidget {
   static const String id = 'registration_screen';
 
   @override
-  _RegistrationScreenState createState() => _RegistrationScreenState();
+  _RegistrationPageState createState() => _RegistrationPageState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
+class _RegistrationPageState extends State<RegistrationPage> {
   final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
   String? email;
@@ -48,7 +48,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                "Register",
+                "Sign Up",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 40,
@@ -59,7 +59,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: "ID"),
+                    border: OutlineInputBorder(), labelText: "Email"),
                 keyboardType: TextInputType.emailAddress,
                 // textAlign: TextAlign.center,
                 onChanged: (value) {
@@ -84,7 +84,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               SizedBox(
                   height: 50.0,
                   child: ElevatedButton(
-                    child: Text("Register"),
+                    child: Text("Sign Up"),
                     onPressed: () async {
                       setState(() {
                         showSpinner = true;

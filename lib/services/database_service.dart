@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class DatabaseService {
-  // final CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
   final CollectionReference groupCollection = FirebaseFirestore.instance.collection('groups');
   
   // 그룹을 새로 만들고, 해당 그룹의 groupId를 반환
@@ -54,11 +53,17 @@ class DatabaseService {
   
   // 그룹을 제거함
   deleteGroup(String groupId) {
+    groupCollection.doc(groupId).collection('messages').get()
+    .then((snapshot){
+      snapshot.docs.forEach((element) {
+        element.reference.delete();
+      });
+    });
     groupCollection.doc(groupId).delete();
   }
   
   // 해당 그룹 채팅방에 참가하고 있는 사용자명 배열을 반환함
-  Future getUserInGroup(String groupId, String userEmail) async{
+  Future<dynamic> getUserInGroup(String groupId, String userEmail) async{
     var documentSnapshot = await groupCollection.doc(groupId).get();
     
     Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;

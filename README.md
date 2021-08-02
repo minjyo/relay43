@@ -35,10 +35,10 @@
 
   | 이름                                              | 한마디 |
   | :------------------------------------------------ | ------ |
-  | **J022_김동환**                                   |        |
-  | **J051_김재훈**                                   |        |
+  | [**J022_김동환**](https://github.com/gidskql6671) |   좋은 경험이었어요   |
+  | [**J051_김재훈**](https://github.com/zaehuun)     | 모두 실력이 좋으셔서 짧은 시간이지만 많이 배울 수 있었습니다!   |
   | [**J063_김필선**](https://github.com/psunny0104)  |        |
-  | **[J130_유정한](https://github.com/youjeonghan)** |        |
+  | **[J130_유정한](https://github.com/youjeonghan)** | 모두 맡은 역할에 최선을 다해주시고, 열정적이셔서 너무 좋았습니다!    |
   | **J132_유주현**                                   |        |
   | **[K025_박태현](https://github.com/CrewDaniel)**  |        |
   | **[S030_오창민](https://github.com/lou0124)**     |        |

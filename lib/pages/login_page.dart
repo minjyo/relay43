@@ -1,17 +1,17 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:relay_43/pages/main_page.dart';
-import 'package:relay_43/screens/welcome_screen.dart';
 import 'package:modal_progress_hud_alt/modal_progress_hud_alt.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   static const String id = 'login_screen';
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginPageState extends State<LoginPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool showSpinner = false;
 
@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                "Sign In",
+                "Log In",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 40,
@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: "ID"),
+                    border: OutlineInputBorder(), labelText: "Email"),
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
                   email = value;
@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                   height: 50.0,
                   child: ElevatedButton(
-                    child: Text("Sign In"),
+                    child: Text("Log In"),
                     onPressed: () async {
                       setState(() {
                         showSpinner = true;
@@ -94,7 +94,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             await _auth.signInWithEmailAndPassword(
                                 email: email!, password: password!);
                         if (newUser != null) {
-                          Navigator.pushNamed(context, MainPage.id);
+                          Navigator.pop(context);
+                          Navigator.pushReplacementNamed(context, MainPage.id);
                         }
                         setState(() {
                           showSpinner = false;

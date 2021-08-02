@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:relay_43/screens/login_screen.dart';
-import 'package:relay_43/screens/registration_screen.dart';
+import 'package:relay_43/pages/login_page.dart';
+import 'package:relay_43/pages/registration_page.dart';
 
-class WelcomeScreen extends StatefulWidget {
+class WelcomePage extends StatefulWidget {
   static const String id = 'welcome_screen';
 
   @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
+  _WelcomePageState createState() => _WelcomePageState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen>
+class _WelcomePageState extends State<WelcomePage>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
@@ -90,10 +90,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     height: 60.0,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, RegistrationScreen.id);
+                        Navigator.pushNamed(context, RegistrationPage.id);
                       },
                       child: Text(
-                        "SIGN IN",
+                        "SIGN UP",
                         style: TextStyle(
                           // fontFamily: "boorsok",
                           letterSpacing: 1.0,
@@ -117,7 +117,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     height: 60.0,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, LoginScreen.id);
+                        Navigator.pushNamed(context, LoginPage.id);
                       },
                       child: Text(
                         "LOG IN",

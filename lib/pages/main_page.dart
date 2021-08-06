@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:relay_43/pages/chat_page.dart';
 import 'package:relay_43/pages/setting_page.dart';
+import 'package:relay_43/pages/test_chat.dart';
 
 import 'package:relay_43/widgets/room_button.dart';
 
@@ -85,6 +86,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) =>
                           SettingPage()));
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.chat),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                          TestChatPage()));
                     },
                   ),
                  ]

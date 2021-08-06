@@ -6,8 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:relay_43/services/database_service.dart';
 import 'package:relay_43/widgets/message_widget.dart';
 
-
-
 class ChatPage extends StatefulWidget {
 
   final String? groupId;

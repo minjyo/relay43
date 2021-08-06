@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:relay_43/pages/chat_page.dart';
+import 'package:relay_43/pages/setting_page.dart';
 
 import 'package:relay_43/widgets/room_button.dart';
 
@@ -58,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
     }
-    
+
     // WillPopScope, 뒤로가기 키를 제어할 수 있도록 함
     return WillPopScope(
       onWillPop: _onBackPressed,
@@ -77,6 +78,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     fontSize: 45,
                   ),
                 ),
+
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.settings),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                          SettingPage()));
+                    },
+                  ),
+                 ]
               ),
             ],
           ),

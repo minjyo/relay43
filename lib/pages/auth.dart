@@ -4,6 +4,7 @@ import 'package:relay_43/pages/main_page.dart';
 import 'package:relay_43/pages/login_page.dart';
 import 'package:relay_43/pages/registration_page.dart';
 import 'package:relay_43/pages/welcome_page.dart';
+import 'package:relay_43/pages/setting_page.dart';
 
 class AuthPage extends StatelessWidget {
   AuthPage({Key? key, required this.title});
@@ -24,6 +25,7 @@ class AuthPage extends StatelessWidget {
         LoginPage.id: (context) => LoginPage(),
         RegistrationPage.id: (context) => RegistrationPage(),
         MainPage.id: (context) => MainPage(title: title),
+        SettingPage.id: (context) => SettingPage(),
       },
     );
   }

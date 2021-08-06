@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:relay_43/pages/login_page.dart';
 import 'package:relay_43/pages/registration_page.dart';
 
+import 'main_page.dart';
+
 class WelcomePage extends StatefulWidget {
   static const String id = 'welcome_screen';
 
@@ -117,7 +119,8 @@ class _WelcomePageState extends State<WelcomePage>
                     height: 60.0,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, LoginPage.id);
+                        // Navigator.pushNamed(context, LoginPage.id);
+                        Navigator.pushNamed(context, MainPage.id);
                       },
                       child: Text(
                         "LOG IN",
